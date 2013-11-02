@@ -7,12 +7,16 @@ var stringifyJSON = function (obj) {
   	debugger;
 	var result = "";	
 	var what = typeof(obj);
+
+	//Cases string, number, boolean,
 	if (what === 'string'){
 		result += '"' + obj + '"';
 	} else if (what === 'number'){
 		result += obj.toString();
 	} else if (what === 'boolean'){
 		result += obj.toString();
+
+	// Array Case
 	} else if (Array.isArray(obj)) {
 		result += "[";
 		for (var i = 0; i < obj.length; i++){
@@ -22,20 +26,24 @@ var stringifyJSON = function (obj) {
 			result += stringifyJSON(obj[i]);
 		}
 		result +="]"
+	
+	// Null Case
 	} else if (obj === null){
 		result += null;
+
+	// Object Case
 	} else {
 		result += "{";
 		var counter = 0;
 		for (var key in obj){
-			if (obj[key] !=== undefined) {
-				if (counter>0){
+			if (key !== undefined && obj[key] !== undefined) {
+				if (counter > 0){
 					result +=",";
 				}
 				result += stringifyJSON(key) + ":" +stringifyJSON(obj[key]);
 				counter++;
-				}
 			}
+		}
 		result += "}";
 	}
 	return result;
