@@ -30,13 +30,13 @@ var stringifyJSON = function (obj) {
 	// Null Case
 	} else if (obj === null){
 		result += null;
-
+		
 	// Object Case
 	} else {
 		result += "{";
 		var counter = 0;
 		for (var key in obj){
-			if (key !== undefined && obj[key] !== undefined) {
+			if (obj[key] !== undefined && typeof(obj[key]) !== 'function' ) {
 				if (counter > 0){
 					result +=",";
 				}
