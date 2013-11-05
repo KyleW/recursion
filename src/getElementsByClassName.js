@@ -5,27 +5,21 @@
 
 // But in stead we're going to implement it from scratch:
 
-var result = [];
-
-var checker = function(current,className){
-	var children = current.childNodes
-    for (var i = 0; i < children.length; i++){
-        if (children[i].classList){
-            for(var key in children[i].classList){
-                if (children[i].classList[key] === className){
-                        result.push(children[i]);
-                }
-            }
+var getElementsByClassName = function (className,current,result) {
+  if (result === undefined) {var result=[];}
+  if (current === undefined) {var current = document.body;}
+  var children = current.childNodes;
+  for (var i = 0; i < children.length; i++){
+    if (children[i].classList){
+      for(var key in children[i].classList){
+        if (children[i].classList[key] === className){
+          result.push(children[i]);
         }
-        if (children[i].hasChildNodes()){
-        	checker(children[i],className);
-        }
+      }
     }
-}
-
-
-var getElementsByClassName = function (className) {
-  	result=[];
-    checker(document.body, className);
-    return result;
+    if (children[i].hasChildNodes()){
+      getElementsByClassName(className,children[i],result);
+    }
+  }
+  return result;
 }
