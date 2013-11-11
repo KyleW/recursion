@@ -10,10 +10,10 @@ var getElementsByClassName = function (className,current,result) {
   result = result || [];
   var children = current.childNodes;
   for (var i = 0; i < children.length; i++){
-      for(var key in children[i].classList){
-        if (children[i].classList[key] === className){
-          result.push(children[i]);
-        }
+    for(var key in children[i].classList){
+      if (children[i].classList[key] === className){
+        result.push(children[i]);
+      }
     }
     if (children[i].hasChildNodes()){
       getElementsByClassName(className,children[i],result);
