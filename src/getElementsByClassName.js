@@ -6,16 +6,14 @@
 // But in stead we're going to implement it from scratch:
 
 var getElementsByClassName = function (className,current,result) {
-  if (result === undefined) {var result=[];}
-  if (current === undefined) {var current = document.body;}
+  current = current || document.body;
+  result = result || [];
   var children = current.childNodes;
   for (var i = 0; i < children.length; i++){
-    if (children[i].classList){
       for(var key in children[i].classList){
         if (children[i].classList[key] === className){
           result.push(children[i]);
         }
-      }
     }
     if (children[i].hasChildNodes()){
       getElementsByClassName(className,children[i],result);
